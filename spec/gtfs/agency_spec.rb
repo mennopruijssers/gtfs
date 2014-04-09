@@ -22,6 +22,7 @@ describe GTFS::Agency do
       	subject[0].extension_attrs.should be_kind_of(Hash)
       	subject[0].extension_attrs.should have_key('extension')
       	expect(subject[0].extension_attrs['extension']).to eq('test')
+      	expect(subject[0].extension_attrs.size).to eq(1)
       end
       
     end
