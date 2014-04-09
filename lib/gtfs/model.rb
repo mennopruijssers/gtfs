@@ -20,7 +20,7 @@ module GTFS
         end
                 
         extension_attrs = attrs.clone
-        attrs.each {|k| extension_attrs.delete k }
+        self.class.attrs.each {|k| extension_attrs.delete k.to_s }
         self.extension_attrs = extension_attrs
       end
     end
