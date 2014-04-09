@@ -2,6 +2,7 @@ require 'csv'
 
 module GTFS
   module Model
+  	attr_accessor :extension_attrs
     def self.included(base)
       base.extend ClassMethods
 
@@ -17,6 +18,10 @@ module GTFS
         attrs.each do |key, val|
           instance_variable_set("@#{key}", val)
         end
+                
+        extension_attrs = attrs.clone
+        attrs.each {|k| extension_attrs.delete k }
+        self.extension_attrs = extension_attrs
       end
     end
 
@@ -41,6 +46,11 @@ module GTFS
       def attrs
        required_attrs + optional_attrs
       end
+      
+      def extension_attrs
+      	self.instance_variable_get('@extension_attrs')
+      end
+
 
       #####################################
       # Helper methods for setting up class variables
